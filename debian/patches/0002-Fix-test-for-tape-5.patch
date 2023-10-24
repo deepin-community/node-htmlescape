@@ -1,0 +1,43 @@
+From c378df1835c31fed87dcff035bf076431ac0d07e Mon Sep 17 00:00:00 2001
+From: Yadd <yadd@debian.org>
+Date: Wed, 18 Aug 2021 16:32:09 +0200
+Subject: Fix test for tape ≥ 5
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ test/htmlescape-test.js | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/test/htmlescape-test.js b/test/htmlescape-test.js
+index 6d7eff1..9a89412 100644
+--- a/test/htmlescape-test.js
++++ b/test/htmlescape-test.js
+@@ -15,7 +15,7 @@ test('htmlescape', function(t) {
+ 
+   t.test('with angle brackets should parse back', function(t) {
+     var evilObj = {evil: '<script></script>'};
+-    t.looseEqual(JSON.parse(htmlescape(evilObj)), evilObj);
++    t.deepEqual(JSON.parse(htmlescape(evilObj)), evilObj);
+     t.end();
+   });
+ 
+@@ -27,7 +27,7 @@ test('htmlescape', function(t) {
+ 
+   t.test('with ampersands should parse back', function(t) {
+     var evilObj = {evil: '&'};
+-    t.looseEqual(JSON.parse(htmlescape(evilObj)), evilObj);
++    t.deepEqual(JSON.parse(htmlescape(evilObj)), evilObj);
+     t.end();
+   });
+ 
+@@ -39,7 +39,7 @@ test('htmlescape', function(t) {
+ 
+   t.test('with "LINE SEPARATOR" and "PARAGRAPH SEPARATOR" should parse back', function(t) {
+     var evilObj = {evil: '\u2028\u2029'};
+-    t.looseEqual(JSON.parse(htmlescape(evilObj)), evilObj);
++    t.deepEqual(JSON.parse(htmlescape(evilObj)), evilObj);
+     t.end();
+   });
+ 
