@@ -1,0 +1,34 @@
+From 431d0905510b83b65d88506fcdad134906e01c1d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Bastien=20Roucari=C3=A8s?= <rouca@debian.org>
+Date: Mon, 7 Jan 2019 02:12:48 +0100
+Subject: Skip test that fail with newer node
+
+JSON.stringify does not choke with line terminaison. So skip test
+
+Forwarded: not-needed
+---
+ test/htmlescape-test.js | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/test/htmlescape-test.js b/test/htmlescape-test.js
+index d83fc9d..6d7eff1 100644
+--- a/test/htmlescape-test.js
++++ b/test/htmlescape-test.js
+@@ -51,7 +51,7 @@ test('htmlescape', function(t) {
+   });
+ 
+   t.test('unescaped line terminators should not work', function(t) {
+-    t.throws(function() {
++    t.skip(function() {
+       vm.runInNewContext('(' + JSON.stringify({evil: '\u2028\u2029'}) + ')');
+     });
+     t.end();
+@@ -64,7 +64,7 @@ test('htmlescape', function(t) {
+     t.end();
+   });
+ 
+-  t.test('unsanitized terminators should not work', function(t) {
++  t.skip('unsanitized terminators should not work', function(t) {
+     t.throws(function() {
+       vm.runInNewContext('("\u2028\u2029")');
+     });
